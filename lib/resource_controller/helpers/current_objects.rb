@@ -15,6 +15,8 @@ module ResourceController
         #
         def collection
           @collection ||= end_of_association_chain.find(:all)
+          unauthorized! if cannot?(params[:action].to_sym, model)
+          @collection
         end
 
         # Returns the current param.
@@ -40,6 +42,7 @@ module ResourceController
         #
         def object
           @object ||= end_of_association_chain.find(param) unless param.nil?
+          unauthorized! if cannot?(params[:action].to_sym, @object || model)
           @object
         end
 
@@ -54,7 +57,7 @@ module ResourceController
         #   end
         #
         def scoping_object
-          false
+          nil
         end
 
         # Used internally to load the member object in to an instance variable @#{model_name} (i.e. @post)
