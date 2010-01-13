@@ -1,4 +1,4 @@
-attr_reader :module ResourceController
+module ResourceController
   module Controller    
     def self.included(subclass)
       subclass.class_eval do
