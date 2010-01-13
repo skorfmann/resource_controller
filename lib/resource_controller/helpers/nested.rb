@@ -54,7 +54,7 @@ module ResourceController
       # Returns the current parent object if a parent object is present.
       #
       def parent_object
-        parent? && !parent_singleton? ? parent_model.find(parent_param) : nil
+        @parent_object ||= parent? && !parent_singleton? ? parent_model.find(parent_param) : nil
       end
 
       # Returns true/false bsed on wether or not a scoping-object is present.
@@ -108,3 +108,4 @@ module ResourceController
     end
   end
 end
+
