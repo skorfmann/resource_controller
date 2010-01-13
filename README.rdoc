@@ -186,6 +186,19 @@ Maybe you have some alternative way of building objects...
   
 ...and there are tons more helpers in the ResourceController::Helpers
 
+=== Scoping objects
+
+If you need to sope the model calls through a specific object. If resource is nested,
+it will be scoped through scoping_object and parent_object
+
+  class PostsController < ResourceController::Base
+    private
+      def scoping_object
+        current_user
+      end
+  end
+
+
 == Nested Resources
 
 Nested controllers can be a pain, especially if routing is such that you may or may not have a parent.  Not so with Resource Controller.

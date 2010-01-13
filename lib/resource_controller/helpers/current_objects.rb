@@ -42,6 +42,20 @@ module ResourceController
           @object ||= end_of_association_chain.find(param) unless param.nil?
           @object
         end
+
+        # Override this method if you'd like to fetch your objects scoped through a specific object. Works also on
+        # nested resources
+        #
+        # class PostsController < ResourceController::Base
+        #   private
+        #     def scoping_object
+        #       current_user
+        #     end
+        #   end
+        #
+        def scoping_object
+          false
+        end
     
         # Used internally to load the member object in to an instance variable @#{model_name} (i.e. @post)
         #
